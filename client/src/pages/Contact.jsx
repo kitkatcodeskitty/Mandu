@@ -12,6 +12,7 @@ export const Contact = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -45,8 +46,8 @@ export const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Form Submitted:", formData);
-      alert("Thank you for contacting us!");
+      // Form submission logic would go here
+      setIsSubmitted(true);
       setFormData({
         firstName: "",
         lastName: "",
@@ -55,21 +56,34 @@ export const Contact = () => {
         message: "",
       });
       setErrors({});
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
     }
   };
 
   return (
-      <div className="bg-pink-50 min-h-screen px-6 py-16 flex items-center justify-center">
+      <div className="bg-white-50 min-h-screen px-6 py-16 flex items-center justify-center">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* Left Side - Form */}
         <div className="lg:col-span-7 bg-white p-8 rounded-2xl shadow-lg">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Contact Us</h2>
           <p className="text-gray-600 mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.
+            Get in touch with us for any questions or support. We're here to help!
           </p>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Success Message */}
+          {isSubmitted && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <p className="text-green-600 text-sm">
+                Thank you for contacting us! We'll get back to you soon.
+              </p>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -78,8 +92,15 @@ export const Contact = () => {
               <input
                 type="text"
                 name="firstName"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                value={formData.firstName}
+                onChange={handleChange}
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#46052D] focus:outline-none ${
+                  errors.firstName ? 'border-red-500' : 'border-gray-300'
+                }`}
               />
+              {errors.firstName && (
+                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+              )}
             </div>
 
             {/* Last Name */}
@@ -90,8 +111,15 @@ export const Contact = () => {
               <input
                 type="text"
                 name="lastName"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                value={formData.lastName}
+                onChange={handleChange}
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#46052D] focus:outline-none ${
+                  errors.lastName ? 'border-red-500' : 'border-gray-300'
+                }`}
               />
+              {errors.lastName && (
+                <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+              )}
             </div>
 
             {/* Email */}
@@ -102,8 +130,15 @@ export const Contact = () => {
               <input
                 type="email"
                 name="email"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#46052D] focus:outline-none ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                }`}
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             {/* Phone */}
@@ -114,8 +149,15 @@ export const Contact = () => {
               <input
                 type="text"
                 name="phone"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                value={formData.phone}
+                onChange={handleChange}
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#46052D] focus:outline-none ${
+                  errors.phone ? 'border-red-500' : 'border-gray-300'
+                }`}
               />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+              )}
             </div>
 
             {/* Message */}
@@ -124,17 +166,25 @@ export const Contact = () => {
                 What do you have in mind?
               </label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="4"
                 placeholder="Please enter query..."
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
-              ></textarea>
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#46052D] focus:outline-none ${
+                  errors.message ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+              {errors.message && (
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+              )}
             </div>
 
             {/* Submit Button */}
             <div className="md:col-span-2">
-              <button
+              <button 
                 type="submit"
-                className="w-full bg-rose-600 text-white py-3 rounded-xl hover:bg-rose-700 transition"
+                className="w-full bg-[#46052D] text-white py-3 rounded-xl hover:bg-[#2d0319] transition duration-200"
               >
                 Submit
               </button>

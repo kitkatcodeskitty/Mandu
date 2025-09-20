@@ -9,6 +9,8 @@ import { About } from './pages/About';
 import {Login} from './pages/Login';
 import {Register} from './pages/Register';
 import { Profile } from './pages/Profile';
+import { ProfileVerification } from './pages/ProfileVerification';
+import { RequestBlood } from './pages/RequestBlood';
 import { ErrorPage } from './pages/ErrorPage'; 
 import './App.css';
 const router = createBrowserRouter([
@@ -24,6 +26,8 @@ const router = createBrowserRouter([
       { path: '/login', element: <Login /> },
       { path: '/register', element: <Register /> },
       { path: '/profile', element: <Profile /> },
+      { path: '/profile-verification', element: <ProfileVerification /> },
+      { path: '/request-blood', element: <RequestBlood /> },
     ]
   } 
 ]);

@@ -1,7 +1,18 @@
 import React from 'react'
-import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaEdit } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 export const Profile = () => {
+  const navigate = useNavigate();
+
+  const handleRequestBlood = () => {
+    navigate('/request-blood');
+  };
+
+  const handleEditProfile = () => {
+    navigate('/profile-verification');
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h2 className="text-sm text-gray-600 mb-3">Profile</h2>
@@ -22,6 +33,13 @@ export const Profile = () => {
                   <span>Blood Type: A negative</span>
                 </div>
               </div>
+              <button
+                onClick={handleEditProfile}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#46052D] border border-[#46052D] rounded-lg hover:bg-[#46052D] hover:text-white transition duration-200"
+              >
+                <FaEdit size={16} />
+                Edit Profile
+              </button>
             </div>
 
             <hr className="my-6 border-gray-200" />
@@ -82,7 +100,12 @@ export const Profile = () => {
       </div>
 
       <div className="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-4 mt-6 flex items-center gap-3 justify-end">
-        <button className="px-5 py-2 rounded-md border text-sm">Request Blood</button>
+        <button 
+          onClick={handleRequestBlood}
+          className="px-5 py-2 rounded-md border text-sm hover:bg-gray-50 transition duration-200"
+        >
+          Request Blood
+        </button>
         <button className="px-5 py-2 rounded-md text-white text-sm" style={{background:'#46052D'}}>Call Now</button>
         <span className="text-[10px] text-gray-400 ml-2">Use in case of emergency</span>
       </div>

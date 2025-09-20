@@ -1,6 +1,7 @@
 
 import { NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
+import { FaBell } from 'react-icons/fa';
 import { useAuth } from '../../contexts/AuthContext';
 import '../../style/Header.css';
 
@@ -85,6 +86,11 @@ export const Header = () => {
             ) : (
               <>
                 <span className="user-greeting">Welcome, {user?.fullName}</span>
+                {/* Notification Button */}
+                <button className="notification-btn" aria-label="Notifications">
+                  <FaBell size={18} />
+                  <span className="notification-badge">3</span>
+                </button>
                 <NavLink to="/profile" className="profile-btn">Profile</NavLink>
                 <button onClick={handleLogout} className="logout-btn">Logout</button>
               </>
